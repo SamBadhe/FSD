@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cars Comparison</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Add your custom CSS here */
+
+    /* Reset some default styles */
+    body, h1, h2, p {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Page background color */
+    body {
+      background-color: #f0f0f0; /* Light gray background color */
+    }
+
+    /* Header styles */
+    header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Menu styles */
+    .menu {
+      background-color: #58bfff;
+      padding: 10px 0;
+      text-align: center; /* Center align the menu items */
+    }
+
+    .menu a {
+      margin: 0 10px;
+      padding: 5px 10px;
+      border: 1px solid #000000;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .menu a:hover {
+      background-color: #f5f5f5;
+    }
+
+    #carOptions div {
+      cursor: pointer; /* Change cursor style to pointer */
+    }
+
+    #carOptions {
+
+      overflow-y: auto; /* Add a vertical scrollbar when needed */
+      display: flex; /* Use flexbox to center-align items */
+      flex-direction: column; /* Stack search results vertically */
+      align-items: center; /* Center-align items horizontally */
+    }
+
+    /* Style for search results */
+    #carOptions div {
+      cursor: pointer; /* Change cursor style to pointer */
+      border: 1px solid #ccc; /* Add a border */
+      padding: 5px; /* Add padding for spacing */
+      background-color: #f7f7f7; /* Add background color */
+      margin: 2px 0; /* Add margin for spacing */
+      max-width: 400px; /* Set a maximum width for search result boxes */
+      white-space: nowrap; /* Prevent text from wrapping */
+      overflow: hidden; /* Hide overflow text */
+      text-overflow: ellipsis; /* Add ellipsis (...) for overflow text */
+    }
+
+    /* Style for selected search result */
+    #carOptions div.selected {
+      background-color: #58bfff; /* Change background color for selected item */
+      color: white; /* Change text color for selected item */
+    }
+
+    /* Main content styles */
+    .main-content {
+      margin-top: 20px;
+    }
+
+    /* Car cards */
+    .car-card {
+      background-color: white;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding-top: 40px; /* Adjust the value as needed */
+    }
+
+    .car-image {
+      width: 100%;
+      height: auto;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .car-details {
+      padding: 15px;
+    }
+
+    /* Specifications table styles */
+    .specifications-table {
+      margin-top: 20px;
+    }
+
+    .specifications-table th, .specifications-table td {
+      text-align: center;
+      vertical-align: middle;
+      background-color: #f7f7f7; /* Light gray background color for table cells */
+    }
+
+    /* Sticky menu */
+    .sticky {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="background-color: #333; color: white;">SUV Cars Specification Comparison</h1>
+  </header>
+
+  <div class="menu sticky">
+    <div class="container">
+      <input type="text" id="carSearch" placeholder="Search for a car" oninput="filterCars()">
+      <div id="carOptions"></div>
+    </div>
+  </div>
+
+  <div class="container main-content ">
+    <div class="row">
+      <!-- Lamborghini Urus Performante -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="urus">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="urus.jpg" alt="Lamborghini Urus Performante" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.lamborghini.com/en-en/models/urus" target="_blank">Lamborghini Urus Performante</a></h2>
+              <p>
+                This is a description of the Lamborghini Urus Performante. It's a high-performance luxury SUV known for its speed and style.
+                Starting Price: $250,000
+                Specifications:
+                <ul>
+                  <li>Engine: 4.0L V8</li>
+                  <li>Horsepower: 680 hp</li>
+                  <li>Torque: 850 Nm</li>
+                  <li>0-60 mph: 3.2 seconds</li>
+                  <li>Top Speed: 200 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Audi RSQ8 -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="rsq8">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="rsq8.jpg" alt="Audi RSQ8" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.audi.in/in/web/en/models/q8/rs-q8.html" target="_blank">Audi RSQ8</a></h2>
+              <p>
+                This is a description of the Audi RSQ8. It combines sportiness with the practicality of an SUV.
+                Starting Price: $115,595
+                Specifications:
+                <ul>
+                  <li>Engine: 4.0L V8</li>
+                  <li>Horsepower: 591 hp</li>
+                  <li>Torque: 800 Nm</li>
+                  <li>0-60 mph: 3.7 seconds</li>
+                  <li>Top Speed: 155 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Porsche Cayenne Turbo GT -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="cayenne">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="cayenne.jpg" alt="Porsche Cayenne Turbo GT" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.porsche.com/usa/models/cayenne/cayenne-coupe-models/cayenne-coupe-turbo-gt/" target="_blank">Porsche Cayenne Turbo GT</a></h2>
+              <p>
+                This is a description of the Porsche Cayenne Turbo GT. It offers a blend of luxury and performance.
+                Starting Price: $132,400
+                Specifications:
+                <ul>
+                  <li>Engine: 4.0L V8</li>
+                  <li>Horsepower: 650 hp</li>
+                  <li>Torque: 850 Nm</li>
+                  <li>0-60 mph: 3.1 seconds</li>
+                  <li>Top Speed: 189 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BMW X5 M Competition -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="x5m">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="x5m.jpg" alt="BMW X5 M Competition" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.bmwusa.com/vehicles/m-models/x5-m/sports-activity-vehicle/overview.html" target="_blank">BMW X5 M Competition</a></h2>
+              <p>
+                This is a description of the BMW X5 M Competition. It's a sporty SUV with impressive power and style.
+                Starting Price: $105,100
+                Specifications:
+                <ul>
+                  <li>Engine: 4.4L V8</li>
+                  <li>Horsepower: 617 hp</li>
+                  <li>Torque: 750 Nm</li>
+                  <li>0-60 mph: 3.8 seconds</li>
+                  <li>Top Speed: 177 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bentley Bentayga Speed -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="bentayga">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="bentayga.jpg" alt="Bentley Bentayga Speed" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.bentleymotors.com/en/models/new-bentayga.html" target="_blank">Bentley Bentayga Speed</a></h2>
+              <p>
+                This is a description of the Bentley Bentayga Speed. It's a luxurious SUV with high-speed capabilities.
+                Starting Price: $240,400
+                Specifications:
+                <ul>
+                  <li>Engine: 6.0L W12</li>
+                  <li>Horsepower: 626 hp</li>
+                  <li>Torque: 900 Nm</li>
+                  <li>0-60 mph: 3.9 seconds</li>
+                  <li>Top Speed: 190 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Range Rover Sport SV -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="rangerover">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="rangerover.jpg" alt="Range Rover Sport SV" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.landroverusa.com/vehicles/range-rover-sport/index.html" target="_blank">Range Rover Sport SV</a></h2>
+              <p>
+                This is a description of the Range Rover Sport SV. It's a luxurious and powerful SUV.
+                Starting Price: $130,000
+                Specifications:
+                <ul>
+                  <li>Engine: 5.0L Supercharged V8</li>
+                  <li>Horsepower: 575 hp</li>
+                  <li>Torque: 700 Nm</li>
+                  <li>0-60 mph: 4.3 seconds</li>
+                  <li>Top Speed: 176 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dodge Durango SRT Hellcat -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="durango">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="durango.jpg" alt="Dodge Durango SRT Hellcat" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.dodge.com/durango.html" target="_blank">Dodge Durango SRT Hellcat</a></h2>
+              <p>
+                This is a description of the Dodge Durango SRT Hellcat. It's a high-performance SUV from Dodge.
+                Starting Price: $82,490
+                Specifications:
+                <ul>
+                  <li>Engine: 6.2L Supercharged V8</li>
+                  <li>Horsepower: 710 hp</li>
+                  <li>Torque: 874 Nm</li>
+                  <li>0-60 mph: 3.5 seconds</li>
+                  <li>Top Speed: 180 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aston Martin DBX 707 -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="dbx">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="dbx.jpg" alt="Aston Martin DBX 707" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.astonmartin.com/en-us/models/dbx" target="_blank">Aston Martin DBX 707</a></h2>
+              <p>
+                This is a description of the Aston Martin DBX 707. It's a high-performance SUV from Aston Martin.
+                Starting Price: $198,995
+                Specifications:
+                <ul>
+                  <li>Engine: 4.0L Twin-Turbo V8</li>
+                  <li>Horsepower: 707 hp</li>
+                  <li>Torque: 800 Nm</li>
+                  <li>0-60 mph: 3.3 seconds</li>
+                  <li>Top Speed: 190 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jaguar F-Pace SVR -->
+      <div class="row">
+        <div class="col-md-12 car-card" id="fpace">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="fpace.jpg" alt="Jaguar F-Pace SVR" class="car-image">
+            </div>
+            <div class="col-md-8 car-details">
+              <h2><a href="https://www.jaguarusa.com/all-models/f-pace/index.html" target="_blank">Jaguar F-Pace SVR</a></h2>
+              <p>
+                This is a description of the Jaguar F-Pace SVR. It's a sporty SUV with great performance.
+                Starting Price: $85,000
+                Specifications:
+                <ul>
+                  <li>Engine: 5.0L Supercharged V8</li>
+                  <li>Horsepower: 550 hp</li>
+                  <li>Torque: 700 Nm</li>
+                  <li>0-60 mph: 4.1 seconds</li>
+                  <li>Top Speed: 176 mph</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Car Comparison Section -->
+      <div class="col-md-12">
+        <div class="card p-4" id="comparison">
+          <h2 class="mb-4">Specifications Comparison</h2>
+          <div class="form-row">
+            <div class="form-group col-md-5">
+              <select id="car1" class="form-control">
+                <option value="">Select Car 1</option>
+                <option value="urus">Urus Performante</option>
+                <option value="rsq8">RSQ8</option>
+                <option value="cayenne">Cayenne Turbo GT</option>
+                <option value="x5m">X5 M Competition</option>
+                <option value="bentayga">Bentayga Speed</option>
+                <option value="rangerover">Range Rover Sport SV</option>
+                <option value="durango">Durango SRT Hellcat</option>
+                <option value="dbx">DBX 707</option>
+                <option value="fpace">F-Pace SVR</option>
+              </select>
+            </div>
+            <div class="form-group col-md-5">
+              <select id="car2" class="form-control">
+                <option value="">Select Car 2</option>
+                <option value="urus">Urus Performante</option>
+                <option value="rsq8">RSQ8</option>
+                <option value="cayenne">Cayenne Turbo GT</option>
+                <option value="x5m">X5 M Competition</option>
+                <option value="bentayga">Bentayga Speed</option>
+                <option value="rangerover">Range Rover Sport SV</option>
+                <option value="durango">Durango SRT Hellcat</option>
+                <option value="dbx">DBX 707</option>
+                <option value="fpace">F-Pace SVR</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <button class="btn btn-primary" onclick="compareCars()">Compare</button>
+            </div>
+          </div>
+          <!-- Comparison Table -->
+          <div class="table-responsive">
+            <table class="table table-bordered specifications-table">
+              <thead>
+                <tr>
+                  <th>Specification</th>
+                  <th id="car1Name"></th>
+                  <th id="car2Name"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Engine</td>
+                  <td id="car1Engine"></td>
+                  <td id="car2Engine"></td>
+                </tr>
+                <tr>
+                  <td>Horsepower</td>
+                  <td id="car1Horsepower"></td>
+                  <td id="car2Horsepower"></td>
+                </tr>
+                <tr>
+                  <td>Torque (Nm)</td>
+                  <td id="car1Torque"></td>
+                  <td id="car2Torque"></td>
+                </tr>
+                <tr>
+                  <td>0-60 mph</td>
+                  <td id="car10-60"></td>
+                  <td id="car20-60"></td>
+                </tr>
+                <tr>
+                  <td>Top Speed</td>
+                  <td id="car1TopSpeed"></td>
+                  <td id="car2TopSpeed"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    
+    const carLinks = {
+      "Lamborghini Urus Performante": "#urus",
+      "Audi RSQ8": "#rsq8",
+      "Porsche Cayenne Turbo GT": "#cayenne",
+      "BMW X5 M Competition": "#x5m",
+      "Bentley Bentayga Speed": "#bentayga",
+      "Range Rover Sport SV": "#rangerover",
+      "Dodge Durango SRT Hellcat": "#durango",
+      "Aston Martin DBX 707": "#dbx",
+      "Jaguar F-Pace SVR": "#fpace"
+    };
+
+    function filterCars() {
+      const carSearchText = document.getElementById("carSearch").value.toLowerCase();
+      const carOptionsContainer = document.getElementById("carOptions");
+
+      carOptionsContainer.innerHTML = "";
+
+      for (const carName in carLinks) {
+        if (carName.toLowerCase().includes(carSearchText)) {
+          const carOption = document.createElement("div");
+          carOption.textContent = carName;
+          carOption.onclick = () => scrollToCar(carName);
+          carOptionsContainer.appendChild(carOption);
+        }
+      }
+    }
+
+    function scrollToCar(carName) {
+      const carLink = carLinks[carName];
+      if (carLink) {
+        window.location.href = carLink;
+        document.getElementById("carSearch").value = carName; // Set the input value to the selected car name
+        clearCarOptions();
+      }
+    }
+
+    function clearCarOptions() {
+      const carOptionsContainer = document.getElementById("carOptions");
+      carOptionsContainer.innerHTML = "";
+    }
+
+    // Add an event listener to clear car options when clicking outside the search input
+    document.addEventListener("click", function (event) {
+      if (!event.target.matches("#carSearch")) {
+        clearCarOptions();
+      }
+    });
+
+    function compareCars() {
+      const car1 = document.getElementById("car1").value;
+      const car2 = document.getElementById("car2").value;
+
+      if (car1 && car2) {
+        // Update the comparison table with selected cars
+        document.getElementById("car1Name").textContent = getCarName(car1);
+        document.getElementById("car2Name").textContent = getCarName(car2);
+        document.getElementById("car1Engine").textContent = getCarEngine(car1);
+        document.getElementById("car2Engine").textContent = getCarEngine(car2);
+        document.getElementById("car1Horsepower").textContent = getCarHorsepower(car1);
+        document.getElementById("car2Horsepower").textContent = getCarHorsepower(car2);
+        document.getElementById("car1Torque").textContent = getCarTorque(car1);
+        document.getElementById("car2Torque").textContent = getCarTorque(car2);
+        document.getElementById("car10-60").textContent = getCar0To60(car1);
+        document.getElementById("car20-60").textContent = getCar0To60(car2);
+        document.getElementById("car1TopSpeed").textContent = getCarTopSpeed(car1);
+        document.getElementById("car2TopSpeed").textContent = getCarTopSpeed(car2);
+
+        // Scroll to the comparison section
+        window.location.href = "#comparison";
+      }
+    }
+
+    function getCarName(car) {
+      // Define car names
+      const carNames = {
+        urus: "Lamborghini Urus Performante",
+        rsq8: "Audi RSQ8",
+        cayenne: "Porsche Cayenne Turbo GT",
+        x5m: "BMW X5 M Competition",
+        bentayga: "Bentley Bentayga Speed",
+        rangerover: "Range Rover Sport SV",
+        durango: "Dodge Durango SRT Hellcat",
+        dbx: "Aston Martin DBX 707",
+        fpace: "Jaguar F-Pace SVR"
+      };
+
+      return carNames[car] || "Unknown Car";
+    }
+
+    function getCarEngine(car) {
+      // Define car engines
+      const carEngines = {
+        urus: "4.0L V8",
+        rsq8: "4.0L V8",
+        cayenne: "4.0L V8",
+        x5m: "4.4L V8",
+        bentayga: "6.0L W12",
+        rangerover: "5.0L Supercharged V8",
+        durango: "6.2L Supercharged V8",
+        dbx: "4.0L Twin-Turbo V8",
+        fpace: "5.0L Supercharged V8"
+      };
+
+      return carEngines[car] || "Unknown Engine";
+    }
+
+    function getCarHorsepower(car) {
+      // Define car horsepower
+      const carHorsepower = {
+        urus: "680 hp",
+        rsq8: "591 hp",
+        cayenne: "650 hp",
+        x5m: "617 hp",
+        bentayga: "626 hp",
+        rangerover: "575 hp",
+        durango: "710 hp",
+        dbx: "707 hp",
+        fpace: "550 hp"
+      };
+
+      return carHorsepower[car] || "Unknown Horsepower";
+    }
+
+    function getCarTorque(car) {
+      // Define car torque in Nm
+      const carTorque = {
+        urus: "850 Nm",
+        rsq8: "800 Nm",
+        cayenne: "850 Nm",
+        x5m: "750 Nm",
+        bentayga: "900 Nm",
+        rangerover: "700 Nm",
+        durango: "874 Nm",
+        dbx: "800 Nm",
+        fpace: "700 Nm"
+      };
+
+      return carTorque[car] || "Unknown Torque";
+    }
+
+    function getCar0To60(car) {
+      // Define car 0-60 mph times
+      const car0To60 = {
+        urus: "3.2 seconds",
+        rsq8: "3.7 seconds",
+        cayenne: "3.1 seconds",
+        x5m: "3.8 seconds",
+        bentayga: "3.9 seconds",
+        rangerover: "4.3 seconds",
+        durango: "3.5 seconds",
+        dbx: "3.3 seconds",
+        fpace: "4.1 seconds"
+      };
+
+      return car0To60[car] || "Unknown 0-60 mph Time";
+    }
+
+    function getCarTopSpeed(car) {
+      // Define car top speeds
+      const carTopSpeed = {
+        urus: "200 mph",
+        rsq8: "155 mph",
+        cayenne: "189 mph",
+        x5m: "177 mph",
+        bentayga: "190 mph",
+        rangerover: "176 mph",
+        durango: "180 mph",
+        dbx: "190 mph",
+        fpace: "176 mph"
+      };
+
+      return carTopSpeed[car] || "Unknown Top Speed";
+    }
+  </script>
+</body>
+</html>
